@@ -29,12 +29,13 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    // GASのdoPostはCORSプリフライトを受けられないため no-cors で送信
+    // GASの302リダイレクトでPOST→GETに変換される対策として
+    // URLSearchParamsで送り、GAS側はe.parameter.payloadで受ける
+    const body = new URLSearchParams({ payload: JSON.stringify(payload) });
     await fetch(GAS_ENDPOINT, {
       method: "POST",
       mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload),
+      body,
     });
     form.reset();
     window.location.href = "thanks.html";

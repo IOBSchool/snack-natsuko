@@ -23,9 +23,19 @@ const ZOOM_URL = "https://us06web.zoom.us/j/89417697625?pwd=MLWA37wP1i2CiOl9bwub
 const ZOOM_ID = "894 1769 7625";
 const ZOOM_PASS = "717165";
 
-function doPost(e) {
+function doPost(e) { return handle(e); }
+function doGet(e)  { return handle(e); }
+
+function handle(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    let data;
+    if (e && e.parameter && e.parameter.payload) {
+      data = JSON.parse(e.parameter.payload);
+    } else if (e && e.postData && e.postData.contents) {
+      data = JSON.parse(e.postData.contents);
+    } else {
+      throw new Error("no payload");
+    }
     writeToSheet(data);
     sendThanksMail(data);
     sendAdminMail(data);
