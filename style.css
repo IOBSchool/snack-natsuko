@@ -370,6 +370,50 @@ a { color: var(--accent); text-decoration: none; }
   margin: 0;
   line-height: 1.8;
 }
+.thanks-zoom {
+  background: #1f1a16;
+  color: #f2ede4;
+  padding: 28px 24px;
+  border-radius: 4px;
+  margin: 0 0 28px;
+}
+.thanks-zoom .thanks-event-label {
+  color: #d9b98a;
+}
+.thanks-zoom-line {
+  margin: 12px 0 18px;
+}
+.thanks-zoom-line a {
+  display: inline-block;
+  background: #d9b98a;
+  color: #1f1a16;
+  padding: 12px 32px;
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  font-family: var(--sans);
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.thanks-zoom-line a:hover { opacity: 0.85; }
+.thanks-zoom-detail {
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 2;
+  margin: 0 0 14px;
+  color: #f2ede4;
+}
+.thanks-zoom-detail strong {
+  color: #fff;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+.thanks-zoom-tip {
+  font-size: 12px;
+  color: #a89680;
+  margin: 0;
+  line-height: 1.8;
+}
 .thanks-note {
   font-size: 12px;
   color: var(--ink-soft);
