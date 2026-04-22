@@ -19,7 +19,9 @@ const SHEET_ID = "★スプレッドシートのIDをここに貼る★";
 const SHEET_NAME = "申込";
 const ADMIN_EMAIL = "organiclifeingermany@gmail.com";
 const EVENT_LABEL = "スナックなつこ (2026/4/28 20:00)";
-const ZOOM_URL = "★ここに当日のZoom URLを貼る★";
+const ZOOM_URL = "https://us06web.zoom.us/j/89417697625?pwd=MLWA37wP1i2CiOl9bwub8jJna6rm4j.1";
+const ZOOM_ID = "894 1769 7625";
+const ZOOM_PASS = "717165";
 
 function doPost(e) {
   try {
@@ -64,6 +66,9 @@ function sendThanksMail(d) {
     ``,
     `■ Zoom URL:`,
     `${ZOOM_URL}`,
+    ``,
+    `  ミーティングID: ${ZOOM_ID}`,
+    `  パスコード: ${ZOOM_PASS}`,
     ``,
     `カメラ・マイクはオフのままでOKです。`,
     `途中入退室・聞くだけ参加も歓迎です。`,

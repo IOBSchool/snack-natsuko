@@ -1,5 +1,5 @@
 // ▼ ここをデプロイ後のGAS Web App URLに差し替える
-const GAS_ENDPOINT = "https://script.google.com/macros/s/XXXXXXXXXXXXXXXXXXXXXXXX/exec";
+const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxfkjC4Z2s4zkn64Je2_54wnn5INmN2_gF3MW5i6Dn6r70af_UR3jJWF1QwEZKnGgwn/exec";
 
 const form = document.getElementById("applyForm");
 const status = document.getElementById("formStatus");
