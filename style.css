@@ -282,8 +282,9 @@ a { color: var(--accent); text-decoration: none; }
   gap: 10px;
 }
 .gallery-grid figure { margin: 0; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 2px; }
-.gallery-grid-featured { grid-template-columns: 1fr; margin-bottom: 14px; }
-.gallery-grid-featured figure.featured { aspect-ratio: 16 / 10; max-height: 560px; }
+.gallery-grid-featured { grid-template-columns: 1fr; margin-bottom: 14px; justify-items: center; }
+.gallery-grid-featured figure.featured { aspect-ratio: 16 / 10; max-height: 560px; width: 100%; max-width: 900px; margin: 0 auto; }
+.gallery-grid-featured figure.featured img { object-position: center; }
 .gallery-grid img {
   width: 100%;
   height: 100%;
