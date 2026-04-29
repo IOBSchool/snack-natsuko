@@ -46,7 +46,20 @@
   <p>「変わりたい」と「怖い」が同時にある。<br>その両方を抱えたまま申込ボタンを押してくれたこと、<br>それだけで、もう十分はじまっています。</p>
 </header>
 
-<section id="form-section">
+<section id="gate-block" style="display:none">
+  <div class="wrap">
+    <div class="card" style="background:#fff5f0;border:1px solid #d97757;border-radius:4px;padding:24px 22px;text-align:center">
+      <p style="margin:0 0 10px;font-size:15px;color:var(--ink);font-weight:500">決済が確認できません</p>
+      <p style="margin:0;font-size:13px;color:var(--sub);line-height:1.9">
+        このページは決済完了後に表示されるページです。<br>
+        お手数ですが、申込ページからお手続きをお願いします。
+      </p>
+      <p style="margin:18px 0 0"><a href="apply-single.html" style="color:var(--accent);font-size:13px">← 申込ページに戻る</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="form-section" style="display:none">
   <div class="wrap">
     <h2><span class="en">REGISTRATION</span>最後にお申込み情報のご登録</h2>
     <div class="card" style="background:var(--accent-soft);border:2px solid var(--accent)">
@@ -143,6 +156,19 @@
 
 <script>
 const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyMV_UbBwd-lUx476EGOMF3O4SWgZMOIoJKsmNA7emQO4ewdJMevKj2QDLzraXjuA/exec';
+
+// URLゲート: ?paid=stripe または ?paid=paypal を持っている人だけ通す
+(function(){
+  const paid = new URLSearchParams(location.search).get('paid');
+  if (paid === 'stripe' || paid === 'paypal') {
+    document.getElementById('form-section').style.display = 'block';
+    // 決済方法を自動セット
+    document.querySelector('select[name="payment"]').value = paid === 'stripe' ? 'Stripe' : 'PayPal';
+  } else {
+    document.getElementById('gate-block').style.display = 'block';
+  }
+})();
+
 document.getElementById('apply-form').addEventListener('submit', async function(e){
   e.preventDefault();
   const msg = document.getElementById('form-msg');

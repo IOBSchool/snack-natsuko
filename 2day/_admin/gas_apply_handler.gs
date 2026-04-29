@@ -51,8 +51,13 @@ function doPost(e) {
       ''
     ]);
 
-    sendAutoReply(params);
-    sendOwnerNotice(params, now);
+    if (params.bank_pending === 'true' || params.payment === '銀行振込') {
+      sendBankPendingReply(params);
+      sendBankNotice(params, now);
+    } else {
+      sendAutoReply(params);
+      sendOwnerNotice(params, now);
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
@@ -114,6 +119,46 @@ function sendOwnerNotice(p, now) {
   MailApp.sendEmail({
     to: NOTIFY_EMAIL,
     subject: `[TT2申込] ${p.name} さん (${p.type})`,
+    body: body
+  });
+}
+
+function sendBankPendingReply(p) {
+  if (!p.email) return;
+  const subject = '【THE THREAD 2日間チャレンジ】お申込みを受け付けました(銀行振込)';
+  const body = [
+    p.name + ' さま',
+    '',
+    'THE THREAD 2日間チャレンジへのお申込み、',
+    'ありがとうございます。',
+    '',
+    '事務局より、お振込み先のご案内メールを',
+    '近日中(原則24時間以内)にお送りいたします。',
+    'いましばらくお待ちください。',
+    '',
+    'ご入金確認後、Zoomリンク・参加者専用BANDのご案内を',
+    '改めてお送りいたします。',
+    '',
+    'THE THREAD 事務局'
+  ].join('\n');
+  MailApp.sendEmail({ to: p.email, subject: subject, body: body, name: FROM_NAME });
+}
+
+function sendBankNotice(p, now) {
+  const body = [
+    '【新規申込・銀行振込】TT2 2日間チャレンジ',
+    '',
+    '⚠ 振込先案内メールの手動送付が必要です(佳代子さん依頼)',
+    '',
+    '日時: ' + now,
+    '種別: ' + p.type,
+    '氏名: ' + p.name,
+    'メール: ' + p.email,
+    '紹介者: ' + (p.referral_name || '-')
+  ].join('\n');
+  MailApp.sendEmail({
+    to: NOTIFY_EMAIL,
+    subject: '[TT2銀行振込] ' + p.name + ' さん - 振込先案内が必要',
     body: body
   });
 }
