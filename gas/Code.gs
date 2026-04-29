@@ -36,23 +36,15 @@ function handle(e) {
   }
 }
 
-function writeToSheet(d) {
-  const name = d.name || "";
-  const email = d.email || "";
+function writeToSheet(data) {
+  const { name = "", email = "", source = "", message = "", event = "", timestamp } = data;
+  const ts = timestamp || new Date().toISOString();
   const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
-  sheet.appendRow([
-    d.timestamp || new Date().toISOString(),
-    name,
-    email,
-    d.source || "",
-    d.message || "",
-    d.event || "",
-  ]);
+  sheet.appendRow([ts, name, email, source, message, event]);
 }
 
-function sendThanksMail(d) {
-  const name = d.name || "";
-  const email = d.email || "";
+function sendThanksMail(data) {
+  const { name = "", email = "" } = data;
   if (!email) return;
   const subject = "【受付完了】" + EVENT_LABEL;
   const body = [
@@ -83,18 +75,17 @@ function sendThanksMail(d) {
   MailApp.sendEmail({ to: email, subject: subject, body: body });
 }
 
-function sendAdminMail(d) {
-  const name = d.name || "";
-  const email = d.email || "";
+function sendAdminMail(data) {
+  const { name = "", email = "", source = "", message = "", timestamp = "" } = data;
   const subject = "[申込] " + EVENT_LABEL + " - " + name;
   const body = [
     "新しい申込が届きました。",
     "",
     "お名前: " + name,
     "メール: " + email,
-    "知ったきっかけ: " + (d.source || ""),
-    "メッセージ: " + (d.message || ""),
-    "受信時刻: " + (d.timestamp || ""),
+    "知ったきっかけ: " + source,
+    "メッセージ: " + message,
+    "受信時刻: " + timestamp,
   ].join("\n");
   MailApp.sendEmail({ to: ADMIN_EMAIL, subject: subject, body: body });
 }
