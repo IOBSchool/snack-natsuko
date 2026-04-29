@@ -45,7 +45,7 @@
 </head>
 <body>
 
-<header>
+<header id="thank-header" style="display:none">
   <div class="badge">THANK YOU ── REFERRAL</div>
   <h1>お申込み、ありがとうございます。<br>大切な人と分かち合う2日間へ。</h1>
   <p>お友達を連れてきてくださって本当に嬉しい。<br>半額でのご参加、感謝を込めて。</p>
@@ -188,6 +188,7 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyMV_UbBwd-lUx476E
 (function(){
   const paid = new URLSearchParams(location.search).get('paid');
   if (paid === 'stripe' || paid === 'paypal') {
+    document.getElementById('thank-header').style.display = 'block';
     document.getElementById('form-section').style.display = 'block';
     document.querySelector('select[name="payment"]').value = paid === 'stripe' ? 'Stripe' : 'PayPal';
   } else {
