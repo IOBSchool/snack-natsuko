@@ -1,21 +1,8 @@
 /**
- * スナックなつこ 申込受付GAS
- *
- * 【セットアップ手順】
- * 1. 既存スプレッドシートに「第2夜_0507」タブを新規追加(第1夜の申込と分離)
- *    1行目(ヘッダ): timestamp | name | email | source | message | event
- * 2. 拡張機能 > Apps Script を開き、このCode.gsを貼り付ける
- * 3. 下の SHEET_ID を、上記スプレッドシートのURLから取得して差し替える
- *    (https://docs.google.com/spreadsheets/d/ ★ここ★ /edit)
- * 4. ADMIN_EMAIL を管理者のGmailアドレスに差し替える
- * 5. デプロイ > 新しいデプロイ > 種類「ウェブアプリ」
- *    - 実行するユーザー: 自分
- *    - アクセスできるユーザー: 全員
- *    - デプロイ → 発行されたWeb App URL を form.js の GAS_ENDPOINT に貼る
- * 6. 権限承認(初回のみGmail/スプレッドシートアクセス許可)
+ * スナックなつこ 申込受付GAS（第2夜・5/7用）
  */
 
-const SHEET_ID = "★スプレッドシートのIDをここに貼る★";
+const SHEET_ID = "1tlJPlJofgcBNdKf0-H0zdoFbKJbAqrLFFxcItxTwRng";
 const SHEET_NAME = "第2夜_0507";
 const ADMIN_EMAIL = "organiclifeingermany@gmail.com";
 const EVENT_LABEL = "スナックなつこ 第2夜 (2026/5/7 20:00)";
@@ -50,11 +37,13 @@ function handle(e) {
 }
 
 function writeToSheet(d) {
+  const name = d.name || "";
+  const email = d.email || "";
   const sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
   sheet.appendRow([
     d.timestamp || new Date().toISOString(),
-    d.name || "",
-    d.email || "",
+    name,
+    email,
     d.source || "",
     d.message || "",
     d.event || "",
@@ -62,46 +51,50 @@ function writeToSheet(d) {
 }
 
 function sendThanksMail(d) {
-  if (!d.email) return;
-  const subject = `【受付完了】${EVENT_LABEL}`;
+  const name = d.name || "";
+  const email = d.email || "";
+  if (!email) return;
+  const subject = "【受付完了】" + EVENT_LABEL;
   const body = [
-    `${d.name} 様`,
-    ``,
-    `この度はスナックなつこにお申し込みいただき、ありがとうございます。`,
-    `以下の日時にお待ちしております。`,
-    ``,
-    `■ 日時: 2026年5月7日(木) 20:00〜21:00(盛り上がったら延長もあり)`,
-    `■ 場所: オンライン(Zoom)`,
-    `■ 参加費: 無料`,
-    ``,
-    `■ Zoom URL:`,
-    `${ZOOM_URL}`,
-    ``,
-    `  ミーティングID: ${ZOOM_ID}`,
-    `  パスコード: ${ZOOM_PASS}`,
-    ``,
-    `カメラ・マイクはオフのままでOKです。`,
-    `途中入退室・聞くだけ参加も歓迎です。`,
-    ``,
-    `当日、お会いできるのを楽しみにしています。`,
-    ``,
-    `─────────────`,
-    `Institut für Organic Business GmbH / THE THREAD`,
+    name + " 様",
+    "",
+    "この度はスナックなつこにお申し込みいただき、ありがとうございます。",
+    "以下の日時にお待ちしております。",
+    "",
+    "■ 日時: 2026年5月7日(木) 20:00〜21:00(盛り上がったら延長もあり)",
+    "■ 場所: オンライン(Zoom)",
+    "■ 参加費: 無料",
+    "",
+    "■ Zoom URL:",
+    ZOOM_URL,
+    "",
+    "  ミーティングID: " + ZOOM_ID,
+    "  パスコード: " + ZOOM_PASS,
+    "",
+    "カメラ・マイクはオフのままでOKです。",
+    "途中入退室・聞くだけ参加も歓迎です。",
+    "",
+    "当日、お会いできるのを楽しみにしています。",
+    "",
+    "─────────────",
+    "Institut für Organic Business GmbH / THE THREAD",
   ].join("\n");
 
-  MailApp.sendEmail({ to: d.email, subject, body });
+  MailApp.sendEmail({ to: email, subject: subject, body: body });
 }
 
 function sendAdminMail(d) {
-  const subject = `[申込] ${EVENT_LABEL} - ${d.name}`;
+  const name = d.name || "";
+  const email = d.email || "";
+  const subject = "[申込] " + EVENT_LABEL + " - " + name;
   const body = [
-    `新しい申込が届きました。`,
-    ``,
-    `お名前: ${d.name}`,
-    `メール: ${d.email}`,
-    `知ったきっかけ: ${d.source}`,
-    `メッセージ: ${d.message}`,
-    `受信時刻: ${d.timestamp}`,
+    "新しい申込が届きました。",
+    "",
+    "お名前: " + name,
+    "メール: " + email,
+    "知ったきっかけ: " + (d.source || ""),
+    "メッセージ: " + (d.message || ""),
+    "受信時刻: " + (d.timestamp || ""),
   ].join("\n");
-  MailApp.sendEmail({ to: ADMIN_EMAIL, subject, body });
+  MailApp.sendEmail({ to: ADMIN_EMAIL, subject: subject, body: body });
 }
