@@ -19,9 +19,9 @@ const SHEET_ID = "★スプレッドシートのIDをここに貼る★";
 const SHEET_NAME = "第2夜_0507";
 const ADMIN_EMAIL = "organiclifeingermany@gmail.com";
 const EVENT_LABEL = "スナックなつこ 第2夜 (2026/5/7 20:00)";
-const ZOOM_URL = "https://us06web.zoom.us/j/89417697625?pwd=MLWA37wP1i2CiOl9bwub8jJna6rm4j.1";
-const ZOOM_ID = "894 1769 7625";
-const ZOOM_PASS = "717165";
+const ZOOM_URL = "https://us06web.zoom.us/j/81756990799?pwd=3vpTe24JJXVEXPXiq6fdusp9MItmE4.1";
+const ZOOM_ID = "817 5699 0799";
+const ZOOM_PASS = "303200";
 
 function doPost(e) { return handle(e); }
 function doGet(e)  { return handle(e); }
