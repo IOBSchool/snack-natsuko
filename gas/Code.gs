@@ -2,7 +2,7 @@
  * スナックなつこ 申込受付GAS
  *
  * 【セットアップ手順】
- * 1. Googleスプレッドシートを新規作成し、シート名を「申込」に変更
+ * 1. 既存スプレッドシートに「第2夜_0507」タブを新規追加(第1夜の申込と分離)
  *    1行目(ヘッダ): timestamp | name | email | source | message | event
  * 2. 拡張機能 > Apps Script を開き、このCode.gsを貼り付ける
  * 3. 下の SHEET_ID を、上記スプレッドシートのURLから取得して差し替える
@@ -16,9 +16,9 @@
  */
 
 const SHEET_ID = "★スプレッドシートのIDをここに貼る★";
-const SHEET_NAME = "申込";
+const SHEET_NAME = "第2夜_0507";
 const ADMIN_EMAIL = "organiclifeingermany@gmail.com";
-const EVENT_LABEL = "スナックなつこ (2026/4/28 20:00)";
+const EVENT_LABEL = "スナックなつこ 第2夜 (2026/5/7 20:00)";
 const ZOOM_URL = "https://us06web.zoom.us/j/89417697625?pwd=MLWA37wP1i2CiOl9bwub8jJna6rm4j.1";
 const ZOOM_ID = "894 1769 7625";
 const ZOOM_PASS = "717165";
@@ -70,7 +70,7 @@ function sendThanksMail(d) {
     `この度はスナックなつこにお申し込みいただき、ありがとうございます。`,
     `以下の日時にお待ちしております。`,
     ``,
-    `■ 日時: 2026年4月28日(火) 20:00〜21:00(盛り上がったら延長もあり)`,
+    `■ 日時: 2026年5月7日(木) 20:00〜21:00(盛り上がったら延長もあり)`,
     `■ 場所: オンライン(Zoom)`,
     `■ 参加費: 無料`,
     ``,
