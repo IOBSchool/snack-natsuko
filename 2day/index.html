@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HSTYLBTXWX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-HSTYLBTXWX');
-</script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THE THREAD 2日間チャレンジ｜"今日も、結局動けなかったな……"の正体を、2日間で見にいく。</title>
+<title>THE THREAD 2日間チャレンジ｜動けないのは、意志が弱いからじゃない。</title>
 <style>
   /* mobile-first design — base styles optimised for 375-414px width */
   :root{
@@ -40,10 +31,18 @@ gtag('config', 'G-HSTYLBTXWX');
 
   /* HERO */
   .hero{
-    padding:56px 20px 48px;
+    position:relative;
+    padding:72px 20px 60px;
     text-align:center;
-    background:linear-gradient(180deg,#f1ebde 0%,var(--bg) 100%);
+    background-image:
+      linear-gradient(180deg, rgba(248,245,239,.72) 0%, rgba(248,245,239,.85) 55%, rgba(248,245,239,.96) 100%),
+      url('https://images.unsplash.com/photo-1705938837353-15b4dd27bebd?w=1600&q=80&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center 30%;
+    background-repeat:no-repeat;
+    overflow:hidden;
   }
+  .hero > *{position:relative;z-index:1}
   .hero .sub{color:var(--sub);letter-spacing:.2em;font-size:10.5px;margin-bottom:14px;font-family:sans-serif}
   .hero h1{
     font-size:22px;
@@ -126,6 +125,28 @@ gtag('config', 'G-HSTYLBTXWX');
     padding:26px 22px;
     border:1px solid var(--line);
     border-radius:4px;
+    overflow:hidden;
+  }
+  /* カード上端に画像をブリード＋下半分は白へグラデで溶け込ませる */
+  .day-img{
+    margin:-26px -22px 18px;
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+  }
+  .day-img img{
+    width:100%;height:100%;
+    display:block;
+    object-fit:cover;
+    filter:sepia(.12) saturate(.88) brightness(1.02) contrast(.96);
+  }
+  .day-img::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:55%;
+    background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,.4) 50%,#fff 100%);
+    pointer-events:none;
   }
   .day .tag{
     display:inline-block;
@@ -380,6 +401,98 @@ gtag('config', 'G-HSTYLBTXWX');
   }
   .enemy .punch strong{color:#e0b88f;font-weight:500;border-bottom:1px dashed #e0b88f;padding-bottom:2px}
 
+  /* checklist */
+  .checklist{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px 20px;margin-top:20px}
+  .checklist ul{list-style:none;margin:0;padding:0}
+  .checklist li{padding:10px 0 10px 28px;position:relative;font-size:14px;line-height:1.85;border-bottom:1px dotted var(--line)}
+  .checklist li:last-child{border-bottom:none}
+  .checklist li::before{content:"✓";position:absolute;left:4px;top:10px;color:var(--accent);font-weight:600}
+
+  /* before-after */
+  .ba{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+  .ba-col{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px 20px}
+  .ba-col.before{background:#efe9dd}
+  .ba-col .label{font-size:10.5px;letter-spacing:.3em;font-family:sans-serif;margin-bottom:12px;color:var(--sub)}
+  .ba-col.after .label{color:var(--accent)}
+  .ba-col ul{margin:0;padding-left:18px;color:var(--ink);font-size:13.5px;line-height:1.95}
+  .ba-col li{margin-bottom:8px}
+  @media(min-width:768px){.ba{flex-direction:row}.ba-col{flex:1}}
+
+  /* voices */
+  .voices{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+  .voice{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;padding:20px 22px;font-size:13.5px;line-height:1.95;color:var(--ink)}
+  .voice .who{display:block;margin-top:10px;color:var(--sub);font-size:12px;letter-spacing:.05em}
+  .voice strong{color:var(--accent);font-weight:500}
+
+  /* price stack */
+  .price-stack{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:26px 22px;margin-top:24px}
+  .price-stack .item{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px dotted var(--line);font-size:13.5px;gap:14px}
+  .price-stack .item:last-of-type{border-bottom:1px solid var(--ink)}
+  .price-stack .item .name{color:var(--ink);flex:1;line-height:1.7}
+  .price-stack .item .val{color:var(--sub);font-family:sans-serif;font-size:12.5px;white-space:nowrap}
+  .price-stack .total{text-align:center;padding:20px 0 4px}
+  .price-stack .total .strike{color:var(--sub);text-decoration:line-through;font-size:13px;font-family:sans-serif}
+  .price-stack .total .now{display:block;font-size:30px;color:var(--accent);letter-spacing:.04em;margin-top:6px;font-weight:500;font-family:sans-serif}
+  .price-stack .total .now small{font-size:14px;margin-left:4px;color:var(--ink)}
+  .price-stack .total .ref{font-size:11.5px;color:var(--sub);margin-top:8px;letter-spacing:.05em}
+
+  /* P.S. */
+  .ps{background:var(--card);border:1px solid var(--accent);border-radius:4px;padding:28px 24px;margin:24px 0 0}
+  .ps .label{color:var(--accent);font-size:11px;letter-spacing:.3em;margin-bottom:14px;font-family:sans-serif;text-align:center}
+  .ps p{margin:0 0 12px;font-size:14px;line-height:2;color:var(--ink)}
+  .ps p:last-child{margin-bottom:0}
+  .ps p.sign{text-align:right;color:var(--sub);font-size:13px;margin-top:18px}
+
+  /* mid-CTA */
+  .mid-cta{text-align:center;margin:28px 0 0}
+  .mid-cta > a{display:inline-block;background:var(--accent);color:#fff;padding:16px 36px;text-decoration:none;border-radius:4px;font-size:14.5px;letter-spacing:.08em;box-shadow:0 4px 16px rgba(192,138,94,.25)}
+  .mid-cta .note{font-size:12px;color:var(--sub);margin-top:10px;line-height:1.7}
+  .mid-cta .note a{text-decoration:underline}
+
+  /* LP統合画像スタイル ── すべての写真を世界観に馴染ませる */
+  .lp-img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:6px;
+    object-fit:cover;
+    background:var(--accent-soft);
+    /* 暖色トーンに寄せて明朝×ベージュの世界観に統合 */
+    filter:sepia(.12) saturate(.88) brightness(1.02) contrast(.96);
+  }
+  .lp-img-frame{
+    position:relative;
+    background:var(--card);
+    padding:8px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:0 10px 32px rgba(120,98,80,.06);
+    overflow:hidden;
+  }
+  .lp-img-frame::after{
+    /* 画像下部に世界観カラーのグラデを薄く重ねて溶け込ませる */
+    content:"";
+    position:absolute;
+    left:8px;right:8px;bottom:8px;
+    height:40%;
+    background:linear-gradient(180deg,transparent 0%,rgba(241,235,222,.18) 100%);
+    border-radius:0 0 4px 4px;
+    pointer-events:none;
+  }
+  .lp-img-frame img{border-radius:4px}
+  .lp-img-bleed{
+    /* セクション端まで馴染ませるバージョン (ヒーロー用) */
+    margin-left:-20px;margin-right:-20px;
+    border-radius:0;
+  }
+  @media(min-width:768px){
+    .lp-img-bleed{margin-left:0;margin-right:0;border-radius:10px}
+  }
+
+  /* hero CTA */
+  .hero-cta{margin-top:24px}
+  .hero-cta a{display:inline-block;background:var(--accent);color:#fff;padding:14px 32px;text-decoration:none;border-radius:4px;font-size:13.5px;letter-spacing:.1em;box-shadow:0 4px 14px rgba(192,138,94,.25)}
+
   /* CTA前のスナック導線 */
   .soft-door{
     background:var(--accent-soft);
@@ -445,10 +558,139 @@ gtag('config', 'G-HSTYLBTXWX');
 
 <header class="hero">
   <div class="sub">THE THREAD ── 2DAYS CHALLENGE</div>
-  <h1>"今日も、結局<br>動けなかったな……"</h1>
-  <p class="lead" style="margin-top:14px">スマホを閉じた指先がふっと冷たくなる、<br>あの夜のベッドの中。<br><br>意志が弱いわけじゃないのに、<br>なぜ、からだが言うことを聞かないのか。<br><br><strong style="color:var(--accent);font-weight:500">その正体を、2日間で見にいきませんか?</strong></p>
-  <div class="date-badge">2026.5.12 (火) &nbsp;/&nbsp; 5.13 (水)</div>
+  <h1>迷いの正体を知り、<br><em>自分に戻る</em>2日間。</h1>
+  <p class="lead">動けないのは、弱いからじゃない。<br>自分と、少しズレているだけ。</p>
+  <p class="lead" style="margin-top:18px;font-size:13px">
+    2日後、<br>
+    "動けない自分"を責めるのをやめて、<br>
+    自分の本音から、<em style="color:var(--accent);font-style:normal">自然に動き出す</em>地点に立っている。
+  </p>
+  <div class="date-badge">2026.5.12 (火) &nbsp;/&nbsp; 5.13 (水)　各日 20:00–22:00 JST</div>
+  <div class="hero-cta">
+    <a href="apply-single.html">お申込みはこちら（4,400円）▶</a>
+  </div>
 </header>
+
+<!-- こんな人へ -->
+<section>
+  <div class="wrap">
+    <h2><span class="en">FOR YOU</span>こんな自分に、心当たりはありませんか?</h2>
+    <div class="checklist">
+      <ul>
+        <li>やる気が出ない自分を、つい責めてしまう</li>
+        <li>頑張ってるのに、なぜか前に進んでいる感覚がない</li>
+        <li>「もっと動かなきゃ」の声に、心と体が固まってしまう</li>
+        <li>ノウハウもマインドセットも試したのに、しっくりこなかった</li>
+        <li>本当はどう生きたいのか、自分でもよく分からなくなってきた</li>
+        <li>誰かに評価されない自分には、価値がない気がしてしまう</li>
+        <li>"変わらなきゃ"の圧から、そろそろ降りたい</li>
+      </ul>
+    </div>
+    <p class="lead-copy center" style="margin-top:20px">
+      ひとつでも当てはまったら、<br>
+      この2日間は、あなたのために設計されています。
+    </p>
+  </div>
+</section>
+
+<!-- AFTER：参加するとどうなれるか -->
+<section style="position:relative;background-image:linear-gradient(180deg,rgba(241,235,222,.78) 0%,rgba(241,235,222,.9) 40%,rgba(241,235,222,.96) 100%),url('https://images.unsplash.com/photo-1613578519724-22fdb5d06388?w=1600&q=80&auto=format&fit=crop');background-size:cover;background-position:center 30%;background-repeat:no-repeat">
+  <div class="wrap">
+    <h2><span class="en">AFTER 2 DAYS</span>2日間を終えたあと、これが起きます</h2>
+    <p class="lead-copy center" style="margin-bottom:8px">
+      気持ちの変化ではなく、<br>
+      <strong style="color:var(--accent);font-weight:500">"選び方"と"動き出し方"</strong>が変わります。
+    </p>
+    <div class="ba" style="margin-top:28px">
+      <div class="ba-col before">
+        <div class="label">これまで</div>
+        <ul>
+          <li>「やった方がいいこと」リストが膨らみ続ける</li>
+          <li>断るたびに罪悪感、引き受けるたびに後悔</li>
+          <li>動けない自分を責める時間が、毎日積み上がる</li>
+          <li>本音を言うと関係が壊れる気がして、飲み込む</li>
+          <li>「次どうしよう」で止まり、数日〜数週間が過ぎる</li>
+          <li>一人の時間が、孤独と焦りで埋まる</li>
+        </ul>
+      </div>
+      <div class="ba-col after">
+        <div class="label">2日後から</div>
+        <ul>
+          <li>"やった方がいい"より<strong>"今日の自分に必要か"</strong>で判断できる</li>
+          <li>断るときに、罪悪感より先に<strong>「これは違う」</strong>の確信が来る</li>
+          <li>動けない日も、責めずに<strong>"理由を見る"</strong>に切り替えられる</li>
+          <li>本音を伝える相手と、飲み込む相手を<strong>区別できる</strong>ようになる</li>
+          <li>「次どうしよう」で止まる回数が<strong>明らかに減る</strong></li>
+          <li>一人の時間が、<strong>"自分と一緒にいる"時間</strong>に変わる</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead-copy center" style="margin-top:28px;font-size:14px">
+      派手な変化ではありません。<br>
+      でも、<strong style="color:var(--accent);font-weight:500">毎日の小さな選択</strong>が変わるから、<br>
+      未来は確実に、違う方向を向きはじめます。
+    </p>
+
+    <!-- 未来の物語 -->
+    <div style="margin-top:48px">
+      <p class="lead-copy center" style="margin-bottom:24px;font-size:14.5px;letter-spacing:.04em">
+        ── 想像してみてください。
+      </p>
+
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:6px;padding:28px 24px;margin-bottom:18px">
+        <div style="color:var(--accent);font-size:11px;letter-spacing:.3em;font-family:sans-serif;margin-bottom:12px">3 MONTHS LATER ── 3ヶ月後</div>
+        <p style="margin:0;font-size:14.5px;line-height:2.05;color:var(--ink)">
+          朝、目が覚めて、最初に浮かぶのが<strong style="color:var(--accent);font-weight:500">「今日、何を大切にしよう」</strong>という問い。<br>
+          以前は「何をやらなきゃ」だったのに。<br>
+          コーヒーを淹れながら、自然と口元がゆるむ。動かなくても、自分を責めない朝が、当たり前になっている。
+        </p>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:6px;padding:28px 24px;margin-bottom:18px">
+        <div style="color:var(--accent);font-size:11px;letter-spacing:.3em;font-family:sans-serif;margin-bottom:12px">6 MONTHS LATER ── 半年後</div>
+        <p style="margin:0;font-size:14.5px;line-height:2.05;color:var(--ink)">
+          人付き合いが、しずかに整理されている。<br>
+          無理して合わせていた集まりから自然と距離ができ、本音で話せる人と過ごす時間が増えた。<br>
+          「断ったのに、関係はむしろ良くなった」── そんな経験が、何度かある。<br>
+          <strong style="color:var(--accent);font-weight:500">"我慢しない自分"のほうが、人に好かれる</strong>という発見。
+        </p>
+      </div>
+
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:6px;padding:28px 24px;margin-bottom:18px">
+        <div style="color:var(--accent);font-size:11px;letter-spacing:.3em;font-family:sans-serif;margin-bottom:12px">1 YEAR LATER ── 1年後</div>
+        <p style="margin:0;font-size:14.5px;line-height:2.05;color:var(--ink)">
+          1年前の自分の写真を見て、「ああ、あのころは目が死んでたな」と気づく。<br>
+          いつのまにか始めていた何か(仕事・趣味・関係・住む場所…)が、想像していなかった形で動き出している。<br>
+          頑張って引っ張り出した未来じゃない。<br>
+          <strong style="color:var(--accent);font-weight:500">内側からこぼれてきた未来</strong>を、自分が生きている。
+        </p>
+      </div>
+    </div>
+
+    <!-- こんな朝 / こんな夜 -->
+    <div style="margin-top:40px">
+      <p class="lead-copy center" style="margin-bottom:20px;font-size:14.5px;letter-spacing:.04em">
+        ── そして、なにより。
+      </p>
+      <div style="background:var(--accent-soft);border:1px solid var(--accent);border-radius:6px;padding:30px 26px;text-align:center">
+        <p style="margin:0 0 18px;font-size:15px;line-height:2.1;color:var(--ink)">
+          <strong style="color:var(--accent);font-weight:500">「自分のことが、ちょっと好きかも」</strong><br>
+          そう思える夜が、増えていきます。
+        </p>
+        <p style="margin:0;font-size:13px;line-height:2;color:var(--sub)">
+          ベッドに入って目を閉じる前、<br>
+          今日の自分にちいさく「おつかれさま」と言える。<br>
+          ──そんな夜を、これから何百回と積み重ねていく未来。
+        </p>
+      </div>
+    </div>
+
+    <div class="mid-cta">
+      <a href="apply-single.html">この未来に、申し込む（4,400円）▶</a>
+      <p class="note">スナックなつこ参加者は、半額の2,200円</p>
+    </div>
+  </div>
+</section>
 
 <!-- D: Distinction（宣言） -->
 <section>
@@ -456,19 +698,15 @@ gtag('config', 'G-HSTYLBTXWX');
     <div class="declare">
       <p class="big">発信のノウハウも、<br>マインドセットの矯正も、<br><em>ここにはありません。</em></p>
       <p class="small">
-        「もっと頑張れ」とも言わない。<br>
-        「あなたを変えてあげる」とも言わない。<br><br>
-        あるのは、2日間かけて<br>
-        「自分の中にある2つの声」ともう一度出会い直す、<br>
-        静かな対話の時間だけ。<br><br>
-        <strong style="color:var(--accent);font-weight:500">本当はもう、十分やってきたんじゃないですか?</strong>
+        あるのは、2日間かけて「自分の中にある2つの声」と<br>
+        もう一度ちゃんと出会い直す、静かな対話の時間だけ。
       </p>
     </div>
   </div>
 </section>
 
 <!-- B: Belief（世界観） -->
-<section style="background:#f1ebde">
+<section style="position:relative;background-image:linear-gradient(180deg,rgba(241,235,222,.92) 0%,rgba(241,235,222,.86) 50%,rgba(241,235,222,.94) 100%),url('https://images.unsplash.com/photo-1640095889747-2090ee12fa7d?w=1600&q=80&auto=format&fit=crop');background-size:cover;background-position:center;background-repeat:no-repeat">
   <div class="wrap">
     <div class="belief">
       <h2><span class="en">OUR BELIEF</span>わたしたちが、信じていること</h2>
@@ -493,22 +731,66 @@ gtag('config', 'G-HSTYLBTXWX');
     </div>
     <p class="video-caption">── THE THREADに参加してくれた方との対談</p>
 
-    <div class="quote">
-      「正直、申し込むまで何度もブラウザを閉じました。"こういう自己啓発系って、また同じ話だろうな"って。<br><br>
-      でも参加してみたら、<strong style="color:var(--accent)">誰にも何も決めつけられない</strong>。質問もアドバイスも飛んでこない。ただ、自分のなかでぐるぐるしていた声が、口から出ていく感覚があって。<br><br>
-      気づいたら、肩のあたりがふっと軽くなって、<strong style="color:var(--accent)">"あ、私こっちに行きたかったんだ"</strong>って自分でわかった。<br>
-      自分でも、びっくりしました」── りかちゃん
+    <div class="ba">
+      <div class="ba-col before">
+        <div class="label">BEFORE ── 参加前</div>
+        <ul>
+          <li>ひとりで考えてぐるぐる、出口が見えない</li>
+          <li>頑張ってるのに、空回りしてる感覚</li>
+          <li>"存在するだけで価値がある"がピンとこない</li>
+          <li>動けない自分を、責め続けていた</li>
+          <li>本音が、自分でもよく分からなくなっていた</li>
+        </ul>
+      </div>
+      <div class="ba-col after">
+        <div class="label">AFTER ── 2日後</div>
+        <ul>
+          <li>モヤモヤが消えて、気づいたらワクワクが止まらない</li>
+          <li>"頑張らなきゃ"のプレッシャーが、ふっと軽くなる</li>
+          <li>役に立てても・立てなくても、どっちでもいいと力が抜ける</li>
+          <li>動けない自分を、責めなくてよくなる</li>
+          <li>本音から、自然に次の一歩が見え始める</li>
+        </ul>
+      </div>
     </div>
-    <div class="quote">
-      「"存在するだけで価値がある"って言葉、正直ピンとこなかったんです。<br>
-      役に立たないと愛されないって、たぶんずっと思ってきたから。<br><br>
-      でも参加した翌朝、いつものキッチンでコーヒーを淹れていたら、<strong style="color:var(--accent)">"今日、何もできなくてもいいや"</strong>って、ふっと思えた。<br><br>
-      胸のあたりにいつもあった重い石みたいなものが、<strong style="color:var(--accent)">なくなってる</strong>のに気づいて。<br>
-      "頑張らなきゃ"のプレッシャーが、ほどけた瞬間でした」── たけちゃん
+
+    <div class="voices">
+      <div class="voice">
+        ひとりで考えていた時は、ずっと同じところをぐるぐる。自分で自分を慰めるしかなくて、しんどかった。<br>
+        でも、安心できる場で話せたら、<strong>モヤモヤが消えて、気づいたらワクワクが止まらなくなっていた</strong>。自分でもびっくりしました。
+        <span class="who">── ある参加者(50代・女性)</span>
+      </div>
+      <div class="voice">
+        "存在するだけで価値がある"って言われても、正直ピンとこなかった。<br>
+        でも参加してから、<strong>人の役に立てても、立てなくても、どっちでもいい</strong>って、力が抜けた感覚に。<br>
+        "頑張らなきゃ"のプレッシャーが、ふっと軽くなりました。
+        <span class="who">── あるメンバー(30代・男性)</span>
+      </div>
+      <div class="voice">
+        評価もアドバイスもされない場って、こんなに安心するんだ、と初めて知りました。<br>
+        <strong>急がせない対話</strong>のなかで、止まっていた自分の本音が、ぽつぽつ出てきた感じです。
+        <span class="who">── ある参加者(40代・女性)</span>
+      </div>
+      <div class="voice">
+        ノウハウもマインドセットもひと通り試して、それでも動けなかった。<br>
+        2日間を終えたあと、<strong>"動けない理由"が責めるものではなく、扱えるもの</strong>に変わっていました。
+        <span class="who">── あるメンバー(40代・女性)</span>
+      </div>
+      <div class="voice">
+        ゴールも宣言もしないのに、終わるころには<strong>"次にやってみたいこと"が自然と浮かんでいた</strong>。<br>
+        頑張って引っ張り出した一歩じゃなく、内側からこぼれてきた一歩でした。
+        <span class="who">── ある参加者(50代・女性)</span>
+      </div>
     </div>
+
     <p class="lead-copy center" style="margin-top:24px">
       色がぼやけていた地点から、もう一度色がつき始めるスタート地点へ。
     </p>
+
+    <div class="mid-cta">
+      <a href="apply-single.html">この2日間に申し込む（4,400円）▶</a>
+      <p class="note">スナックなつこ参加者は、半額の2,200円でお申込みいただけます</p>
+    </div>
   </div>
 </section>
 
@@ -563,13 +845,9 @@ gtag('config', 'G-HSTYLBTXWX');
       <strong style="color:var(--accent)">内側の声</strong>が聞こえなくなっていく。
     </p>
     <div class="quote">
-      朝、洗面所の鏡の前。<br>
-      "今日こそ、あれを始めよう"と思った数秒後に、<br>
-      みぞおちのあたりがキュッと固くなる感覚── 経験ありませんか?<br><br>
       動けないのは、意志が弱いからじゃない。<br>
-      <strong style="color:var(--accent)">あなたの本音と、日常のあいだに静かなズレがある</strong>だけ。<br><br>
-      この2日間は、そのズレを、<br>
-      責めずに、急がせずに、やさしく見にいく時間です。
+      あなたの本音と、日常のあいだに<strong style="color:var(--accent)">静かなズレ</strong>があるだけ。<br>
+      この2日間は、そのズレを、やさしく見に行く時間です。
     </div>
   </div>
 </section>
@@ -581,39 +859,63 @@ gtag('config', 'G-HSTYLBTXWX');
 
     <div class="days">
       <div class="day">
+        <div class="day-img">
+          <img src="https://images.unsplash.com/photo-1569229761589-8838faca0b91?w=900&q=80&auto=format&fit=crop" loading="lazy" alt="DAY1 迷いの構造を知る ノートに書き出す">
+        </div>
         <span class="tag">DAY 1 ── 5.12 (火)</span>
         <h3>迷いの構造を知る日</h3>
         <div class="theme">〜動けないのは弱さじゃない。ただ、自分とズレているだけ〜</div>
         <p class="desc">
-          悩み → 理想 → 現状。<br>
-          その3つを並べて可視化した瞬間、「前に進めない本当の理由」が、やさしい形で見えてきます。努力不足ではなかった、という認識の転換が起きる1日。
+          自分のなかにある「悩み・理想・現状」を、ゆっくり並べて見ていきます。<br>
+          並べた瞬間、「前に進めない本当の理由」が、責めるものではなく<strong style="color:var(--accent);font-weight:500">扱えるもの</strong>として見えてくる。<br>
+          努力不足じゃなかった──そのことに、安心して気づける夜になります。
         </p>
-        <ul>
-          <li>ワーク①：モヤモヤの可視化(仕事・人間関係・将来)</li>
-          <li>ワーク②：制限のない理想の可視化</li>
-          <li>ワーク③：現状との"ズレ"を明確にする</li>
-          <li>レクチャー：なぜ理想になれないのか?</li>
-          <li>少人数ブレイクアウトでの対話(評価もアドバイスもしない)</li>
-          <li>最後30分は自由参加のオンライン交流会</li>
-        </ul>
       </div>
 
       <div class="day">
+        <div class="day-img">
+          <img src="https://images.unsplash.com/photo-1593612631317-7e94de0c38e0?w=900&q=80&auto=format&fit=crop" loading="lazy" alt="DAY2 自分に戻る 胸に手を当てる">
+        </div>
         <span class="tag">DAY 2 ── 5.13 (水)</span>
         <h3>自分に戻る日</h3>
         <div class="theme">〜外側の声から、内側の声へ〜</div>
         <p class="desc">
-          人は「外側の声」で動こうとするほど、「内側の声」が聞こえなくなる。<br>
-          このしくみをやさしく紐解きながら、本来の自分で生きる未来を、もう一度からだで感じ直す1日です。
+          外側の声(べき・ねば・期待)から、内側の声(本音)へ、ゆっくり耳を澄ませる1日。<br>
+          頭で考えるのではなく、<strong style="color:var(--accent);font-weight:500">からだで感じ直す</strong>時間です。<br>
+          「あ、これが本来の自分か」──その感覚を、思い出して帰っていただきます。
         </p>
-        <ul>
-          <li>レクチャー：ズレの正体(外側の声／内側の声)</li>
-          <li>ワーク④：本音の明確化(内側の声を書き出す)</li>
-          <li>ワーク⑤：本来の自分で生きる未来のビジュアライゼーション</li>
-          <li>感想シェア&クロージング</li>
-          <li>最後30分はご興味ある方にはTHE THREAD本講座のことをシェア(自由参加)</li>
-        </ul>
       </div>
+    </div>
+
+    <div class="mid-cta">
+      <a href="apply-single.html">2日間を予約する（4,400円）▶</a>
+      <p class="note">締切：2026年5月11日(月) 23:59</p>
+    </div>
+  </div>
+</section>
+
+<!-- 価格 / 受け取れるもの -->
+<section style="background:#f1ebde">
+  <div class="wrap">
+    <h2><span class="en">WHAT YOU RECEIVE</span>2日間で受け取るもの</h2>
+    <p class="lead-copy center">"4,400円分"ではなく、"自分に戻る装置一式"を。</p>
+
+    <div class="price-stack">
+      <div class="item"><span class="name">本編 2日間ライブセッション(各120分)</span><span class="val">通常 44,000円相当</span></div>
+      <div class="item"><span class="name">少人数ブレイクアウト対話(評価もアドバイスもしない)</span><span class="val">本編に含む</span></div>
+      <div class="item"><span class="name">期間限定アーカイブ視聴(両日)</span><span class="val">3,300円相当</span></div>
+      <div class="item"><span class="name">先着10名｜THREAD AIコーチ 利用権(〜5/24)</span><span class="val">11,000円相当</span></div>
+
+      <div class="total">
+        <span class="strike">通常 58,300円相当</span>
+        <span class="now">4,400<small>円(税込)</small></span>
+        <p class="ref">スナックなつこ参加者は、半額の <strong style="color:var(--accent)">2,200円</strong></p>
+      </div>
+    </div>
+
+    <div class="mid-cta">
+      <a href="apply-single.html">通常料金で申し込む（4,400円）▶</a>
+      <p class="note"><a href="apply-snack.html" style="color:var(--accent)">スナックなつこ参加者特典で半額(2,200円)申込 ▶</a></p>
     </div>
   </div>
 </section>
@@ -626,7 +928,7 @@ gtag('config', 'G-HSTYLBTXWX');
         <dt>開催日時</dt><dd>2026年5月12日(火)・5月13日(水)<br>各日 20:00〜22:00(日本時間)<small>※各日120分(ワーク90分+自由参加の交流・シェア30分)/オンライン開催(Zoom)</small></dd>
         <dt>参加費</dt><dd>4,400円(税込・2日間セット)<small>※1日あたり2,200円</small></dd>
         <dt>申込締切</dt><dd>2026年5月11日(月) 23:59</dd>
-        <dt>紹介制度</dt><dd>お友達を1人連れてくる方は<strong>その場で半額の2,200円</strong>でご参加いただけます(即時割引)。<br><br>さらに、紹介人数の多かった方にはランキング賞金もご用意しています。<br>🥇 <strong>1位：2万円</strong>／🥈 <strong>2位：1万円</strong><br>ランキングは紹介者専用BANDで毎日発表します。<small>※「紹介して申し込む」からお手続きください。お申込みフォームで、連れてくる方のお名前をご記入いただきます。お連れの方ご自身は別途「ひとりで申し込む」から通常料金(4,400円)でお申込みください。</small></dd>
+        <dt>スナックなつこ参加者特典</dt><dd>4/28または5/7のスナックなつこにご参加された方は、<strong>半額の2,200円</strong>でお申込みいただけます。<small>※「スナックなつこ参加者特典で申し込む」からお手続きください。</small></dd>
         <dt>お支払い方法</dt><dd>クレジットカード(Stripe)／PayPal／銀行振込<small>※お申込みフォームでご希望の方法をお選びください</small></dd>
         <dt>お申込み</dt><dd>下記フォームよりお申込みください</dd>
       </dl>
@@ -676,20 +978,24 @@ gtag('config', 'G-HSTYLBTXWX');
       <dd>安心の場づくりのため、基本は顔出しでのご参加をお願いしています。難しい場合はご相談ください。</dd>
       <dt>初めての参加でも大丈夫ですか?</dt>
       <dd>もちろんです。初めましての方を中心に設計しています。</dd>
-      <dt>今すぐ決められません……</dt>
-      <dd>5/7(木)20時から、無料のオンラインイベント「スナックなつこ」を開催します。THE THREADの空気感を体験してから判断していただいてOKです。<br><a href="https://iobschool.github.io/snack-natsuko/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">▶ スナックなつこ 申込ページ</a></dd>
+      <dt>本講座(THE THREAD)に必ず申し込まなければいけませんか?</dt>
+      <dd>いいえ、まったく必要ありません。2日間チャレンジは単独で完結する設計です。本講座のご案内はDay2の最後30分のみ、自由参加でお伝えします。</dd>
+      <dt>申込締切ぎりぎりまで迷っても大丈夫ですか?</dt>
+      <dd>はい、5月11日(月)23:59まで受付しています。ただし先着10名のTHREAD AIコーチ特典は、お早めのお申込みで確保しやすくなります。</dd>
     </dl>
   </div>
 </section>
 
-<!-- K直前: やわらかい導線 -->
+<!-- P.S. -->
 <section>
   <div class="wrap">
-    <div class="soft-door">
-      <div class="label">BEFORE YOU DECIDE</div>
-      <strong>まずは、空気感だけ見に来てみませんか?</strong>
-      <p>5/7(木) 20:00 ─ オンライン無料イベント「スナックなつこ」。<br>THE THREADの世界観を、60分だけ先に体験できます。</p>
-      <p style="margin-top:16px"><a href="https://iobschool.github.io/snack-natsuko/" target="_blank" rel="noopener" style="display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;text-decoration:none;border-radius:4px;font-size:13px;letter-spacing:.1em">スナックなつこ 申込はこちら ▶</a></p>
+    <div class="ps">
+      <div class="label">P.S. ── なつこから</div>
+      <p>もし今、「やる気が出ない自分」を責めながらこのページを読んでくれているなら、<br>その手をどうか、いったん止めてほしいの。</p>
+      <p>動けないのは、あなたが弱いからじゃない。<br>ただ、自分とちょっとだけズレているだけ。<br>その"ちょっと"を、一人で抱え込まなくていい場所を、5月12日と13日に用意しました。</p>
+      <p>2日間で何かを"成し遂げる"必要はないです。<br>ただ、ひとりで抱え込んでいたものを、いったん横に置いてみる。<br>それだけで、見える景色は驚くほど変わります。</p>
+      <p>5月12日と13日、夜20時。<br>戻ってこられる場所を、用意して待っています。</p>
+      <p class="sign">── レムケなつこ</p>
     </div>
   </div>
 </section>
@@ -697,15 +1003,11 @@ gtag('config', 'G-HSTYLBTXWX');
 <!-- K: Kinetic（行動喚起） -->
 <section class="cta">
   <h2><span class="en">JOIN US</span>戻れる場所を、受け取る。</h2>
-  <p>"もう、ひとりでぐるぐるするのは疲れた"<br>
-  ──そんな声が、胸のどこかから聞こえているなら。<br><br>
-  急がなくていい。<br>
-  ただ、ここに戻ってきてください。<br>
-  あなたを変えようとしない場所が、ここにあります。</p>
+  <p>急がなくていい。<br>でも、もし"もう十分ひとりで抱えてきたな"と感じているなら、<br>ここに戻ってきてください。</p>
   <div class="cta-choice">
-    <a href="apply-single.html">ひとりで申し込む（4,400円）</a>
-    <a href="apply-referral.html" class="secondary">紹介して申し込む（半額 2,200円）</a>
-    <p class="note" style="margin:6px 0 0;font-size:12px">※ お友達を1人連れてくる方は、その場で半額でお申込みいただけます。フォームで連れてくる方のお名前をお伝えください。</p>
+    <a href="apply-single.html">通常料金で申し込む（4,400円）</a>
+    <a href="apply-snack.html" class="secondary">スナックなつこ参加者特典で申し込む（半額 2,200円）</a>
+    <p class="note" style="margin:6px 0 0;font-size:12px">※ 4/28または5/7のスナックなつこにご参加された方は、半額の2,200円でお申込みいただけます。</p>
   </div>
   <div class="deadline">申込締切：2026年5月11日(月) 23:59</div>
 </section>
