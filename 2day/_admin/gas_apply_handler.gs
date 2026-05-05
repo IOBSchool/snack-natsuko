@@ -22,7 +22,7 @@ const NOTIFY_EMAIL = 'organiclifeingermany@gmail.com';  // なつこさん通知
 const FROM_NAME = 'THE THREAD 事務局';
 
 const HEADERS = [
-  '申込日時','種別','氏名','メールアドレス','紹介者氏名','決済方法','備考'
+  '申込日時','種別','氏名','メールアドレス','スナック参加日','決済方法','備考'
 ];
 
 const ZOOM_URL = 'https://us06web.zoom.us/j/5403853001?pwd=NnBrSmxBeWYxZXhuWkdIK1ZoZW5XQT09&omn=84461325024';
@@ -112,7 +112,7 @@ function sendOwnerNotice(p, now) {
     `種別: ${p.type}`,
     `氏名: ${p.name}`,
     `メール: ${p.email}`,
-    `紹介者: ${p.referral_name || '-'}`,
+    `スナック参加:${p.referral_name || '-'}`,
     `決済: ${p.payment}`,
     `BAND希望: ${p.band}`
   ].join('\n');
@@ -154,7 +154,7 @@ function sendBankNotice(p, now) {
     '種別: ' + p.type,
     '氏名: ' + p.name,
     'メール: ' + p.email,
-    '紹介者: ' + (p.referral_name || '-')
+    'スナック参加:' + (p.referral_name || '-')
   ].join('\n');
   MailApp.sendEmail({
     to: NOTIFY_EMAIL,
