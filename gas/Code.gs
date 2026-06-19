@@ -1,14 +1,13 @@
 /**
- * スナックなつこ 申込受付GAS（第2夜・5/7用）
+ * スナックなつこ 申込受付GAS（第3夜・7/31用）
  */
 
 const SHEET_ID = "1tlJPlJofgcBNdKf0-H0zdoFbKJbAqrLFFxcItxTwRng";
-const SHEET_NAME = "第2夜_0507";
+const SHEET_NAME = "第3夜_0731";
 const ADMIN_EMAIL = "organiclifeingermany@gmail.com";
-const EVENT_LABEL = "スナックなつこ 第2夜 (2026/5/7 20:00)";
-const ZOOM_URL = "https://us06web.zoom.us/j/81756990799?pwd=3vpTe24JJXVEXPXiq6fdusp9MItmE4.1";
-const ZOOM_ID = "817 5699 0799";
-const ZOOM_PASS = "303200";
+const EVENT_LABEL = "スナックなつこ 第3夜 (2026/7/31 20:00)";
+const ZOOM_URL = "https://us06web.zoom.us/j/82181333557";
+const ZOOM_ID = "821 8133 3557";
 
 function doPost(e) { return handle(e); }
 function doGet(e)  { return handle(e); }
@@ -53,7 +52,7 @@ function sendThanksMail(data) {
     "この度はスナックなつこにお申し込みいただき、ありがとうございます。",
     "以下の日時にお待ちしております。",
     "",
-    "■ 日時: 2026年5月7日(木) 20:00〜21:00(盛り上がったら延長もあり)",
+    "■ 日時: 2026年7月31日(金) 20:00〜21:00(盛り上がったら延長もあり)",
     "■ 場所: オンライン(Zoom)",
     "■ 参加費: 無料",
     "",
@@ -61,7 +60,6 @@ function sendThanksMail(data) {
     ZOOM_URL,
     "",
     "  ミーティングID: " + ZOOM_ID,
-    "  パスコード: " + ZOOM_PASS,
     "",
     "カメラ・マイクはオフのままでOKです。",
     "途中入退室・聞くだけ参加も歓迎です。",

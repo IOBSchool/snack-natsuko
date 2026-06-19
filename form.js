@@ -24,7 +24,7 @@ form.addEventListener("submit", async (e) => {
     email: data.get("email"),
     source: data.get("source") || "",
     message: data.get("message") || "",
-    event: "snack-natsuko-2026-04-28",
+    event: "snack-natsuko-2026-07-31",
     timestamp: new Date().toISOString(),
   };
 
