@@ -432,3 +432,5 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--ink-soft);
   border-top: 1px solid var(--line);
 }
+
+.profile-note { margin-top: 32px; text-align: center; line-height: 2; }
