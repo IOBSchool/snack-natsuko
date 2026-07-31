@@ -6,8 +6,9 @@ const SHEET_ID = "1tlJPlJofgcBNdKf0-H0zdoFbKJbAqrLFFxcItxTwRng";
 const SHEET_NAME = "第3夜_0731";
 const ADMIN_EMAIL = "organiclifeingermany@gmail.com";
 const EVENT_LABEL = "スナックなつこ 第3夜 (2026/7/31 20:00)";
-const ZOOM_URL = "https://us06web.zoom.us/j/82181333557";
-const ZOOM_ID = "821 8133 3557";
+const ZOOM_URL = "https://us06web.zoom.us/j/5403853001?pwd=NnBrSmxBeWYxZXhuWkdIK1ZoZW5XQT09&omn=82181333557";
+const ZOOM_ID = "540 385 3001";
+const ZOOM_PASS = "7RP26b";
 
 function doPost(e) { return handle(e); }
 function doGet(e)  { return handle(e); }
@@ -60,6 +61,7 @@ function sendThanksMail(data) {
     ZOOM_URL,
     "",
     "  ミーティングID: " + ZOOM_ID,
+    "  パスコード: " + ZOOM_PASS,
     "",
     "カメラ・マイクはオフのままでOKです。",
     "途中入退室・聞くだけ参加も歓迎です。",
