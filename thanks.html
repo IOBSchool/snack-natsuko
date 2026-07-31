@@ -29,17 +29,17 @@ gtag('config', 'G-HSTYLBTXWX');
     <div class="thanks-divider"></div>
 
     <p class="thanks-lead">
-      7月31日の夜、<br>カウンターでお待ちしています。
+      その夜、<br>カウンターでお待ちしています。
     </p>
 
     <div class="thanks-event">
-      <p class="thanks-event-label">開催日時</p>
-      <p class="thanks-event-date">2026年7月31日(金) 20:00 —</p>
-      <p class="thanks-event-sub">オンライン(Zoom)／参加無料<br>盛り上がったら延長もあり</p>
+      <p class="thanks-event-label">お申し込みの夜</p>
+      <p class="thanks-event-date" id="thanksEventDate">2026年8月28日(金)／9月25日(金)／10月30日(金)</p>
+      <p class="thanks-event-sub">いずれも20:00〜21:00・オンライン(Zoom)／参加無料<br>盛り上がったら延長もあり</p>
     </div>
 
     <div class="thanks-zoom">
-      <p class="thanks-event-label">Zoom 参加情報</p>
+      <p class="thanks-event-label">Zoom 参加情報(毎回共通・このままずっと使えます)</p>
       <p class="thanks-zoom-line">
         <a href="https://us06web.zoom.us/j/5403853001?pwd=NnBrSmxBeWYxZXhuWkdIK1ZoZW5XQT09&amp;omn=82181333557" target="_blank" rel="noopener">
           Zoomに参加する
@@ -54,6 +54,18 @@ gtag('config', 'G-HSTYLBTXWX');
         ※ カメラ・マイクはオフのままでOK
       </p>
     </div>
+
+    <script>
+      (function () {
+        try {
+          var raw = sessionStorage.getItem("snackSelectedDates");
+          var dates = raw ? JSON.parse(raw) : null;
+          if (dates && dates.length) {
+            document.getElementById("thanksEventDate").innerHTML = dates.join("<br>");
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <p class="thanks-note">
       ご入力いただいたメールアドレス宛にも、確認メールをお送りしています(迷惑メールフォルダもご確認ください)。<br>

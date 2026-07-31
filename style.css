@@ -421,6 +421,37 @@ img { max-width: 100%; }
   border-color: var(--lantern);
   box-shadow: 0 0 0 3px rgba(224, 153, 63, 0.3);
 }
+.apply-dates {
+  border: 1px solid rgba(246, 241, 230, 0.18);
+  border-radius: 10px;
+  padding: 18px 18px 14px;
+  margin: 0;
+}
+.apply-dates legend {
+  padding: 0 6px;
+  font-size: 13px;
+  color: rgba(246, 241, 230, 0.85);
+}
+.apply-dates legend em { color: var(--lantern-soft); font-style: normal; font-size: 12px; margin-left: 6px; }
+.checkbox-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px dashed rgba(246, 241, 230, 0.14);
+  cursor: pointer;
+}
+.checkbox-row:last-of-type { border-bottom: none; }
+.checkbox-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  accent-color: var(--lantern);
+  cursor: pointer;
+}
+.checkbox-row span { font-size: 14.5px; color: #f6f1e6; }
+.apply-dates .note { color: rgba(246, 241, 230, 0.6); margin: 10px 0 0; }
 .apply-form button { margin-top: 14px; align-self: center; }
 .form-status { text-align: center; min-height: 1.2em; font-size: 14px; }
 .form-status.ok { color: #9fd89f; }

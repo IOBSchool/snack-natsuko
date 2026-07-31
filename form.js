@@ -1,14 +1,28 @@
 // ▼ ここをデプロイ後のGAS Web App URLに差し替える
 const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxfkjC4Z2s4zkn64Je2_54wnn5INmN2_gF3MW5i6Dn6r70af_UR3jJWF1QwEZKnGgwn/exec";
 
+// 日程のvalue→表示ラベル対応（thanksページでの表示とsheet集計用）
+const DATE_LABELS = {
+  "2026-08-28": "第4夜｜2026年8月28日(金) 20:00〜21:00",
+  "2026-09-25": "第5夜｜2026年9月25日(金) 20:00〜21:00",
+  "2026-10-30": "第6夜｜2026年10月30日(金) 20:00〜21:00",
+};
+
 const form = document.getElementById("applyForm");
 const status = document.getElementById("formStatus");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const dates = Array.from(form.querySelectorAll('input[name="dates"]:checked')).map((el) => el.value);
+
   if (!form.checkValidity()) {
     status.textContent = "必須項目をご確認ください。";
+    status.className = "form-status err";
+    return;
+  }
+  if (dates.length === 0) {
+    status.textContent = "参加したい夜を1つ以上選んでください。";
     status.className = "form-status err";
     return;
   }
@@ -24,7 +38,7 @@ form.addEventListener("submit", async (e) => {
     email: data.get("email"),
     source: data.get("source") || "",
     message: data.get("message") || "",
-    event: "snack-natsuko-2026-07-31",
+    dates,
     timestamp: new Date().toISOString(),
   };
 
@@ -37,6 +51,8 @@ form.addEventListener("submit", async (e) => {
       mode: "no-cors",
       body,
     });
+    // thanksページで選択した夜を表示するために保存
+    sessionStorage.setItem("snackSelectedDates", JSON.stringify(dates.map((d) => DATE_LABELS[d] || d)));
     form.reset();
     window.location.href = "thanks.html";
     return;
