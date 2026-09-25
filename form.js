@@ -3,7 +3,6 @@ const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxfkjC4Z2s4zkn64Je
 
 // 日程のvalue→表示ラベル対応（thanksページでの表示とsheet集計用）
 const DATE_LABELS = {
-  "2026-08-28": "第4夜｜2026年8月28日(金) 20:00〜21:00",
   "2026-09-25": "第5夜｜2026年9月25日(金) 20:00〜21:00",
   "2026-10-30": "第6夜｜2026年10月30日(金) 20:00〜21:00",
 };
